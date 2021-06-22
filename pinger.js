@@ -55,4 +55,4 @@ function checkInternetConnection() {
     });
 }
 
-setInterval(checkInternetConnection, 1000);
+setInterval(checkInternetConnection, 10000);
