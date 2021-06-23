@@ -1,0 +1,1 @@
+START D:\++Sayth++\Games\Steam\steam.exe

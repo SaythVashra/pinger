@@ -1,0 +1,1 @@
+node "C:\Users\Sayth\Desktop\Web Development\pinger\pinger.js"
