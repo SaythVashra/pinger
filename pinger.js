@@ -1,5 +1,3 @@
-const express = require("express");
-const app = express();
 const https = require("https");
 const play = require('audio-play');
 const load = require('audio-loader');
@@ -25,11 +23,17 @@ function getDate() {
 }
 
 function connectAlarm() {
-    load(__dirname + '/sounds/connect-alarm.mp3').then(play);
+    let player = require('play-sound')(opts = {})
+    player.play('sounds/connect-alarm.mp3', function (err) {
+        if (err) throw err
+    })
 }
 
 function disconnectAlarm() {
-    load('sounds/disconnect-alarm.mp3').then(play);
+    let player = require('play-sound')(opts = {})
+    player.play('sounds/disconnect-alarm.mp3', function (err) {
+        if (err) throw err
+    })
 }
 
 function checkInternetConnection() {
@@ -44,6 +48,7 @@ function checkInternetConnection() {
                 if (!weAreOnline) {
                     weAreOnline = true;
                     console.error("Internet connection found!!  " + getDate());
+                    connectAlarm();
                 }
             }
         });
@@ -51,6 +56,7 @@ function checkInternetConnection() {
         if (weAreOnline) {
             weAreOnline = false;
             console.error("Internet connection lost...  " + getDate());
+            disconnectAlarm();
         }
     });
 }
