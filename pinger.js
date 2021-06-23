@@ -9,6 +9,7 @@ let html = "";
 let appleCaptiveHtml = "<HTML><HEAD><TITLE>Success</TITLE></HEAD><BODY>Success</BODY></HTML>\n"
 let url = 'https://captive.apple.com/';
 
+
 function getDate() {
 
     const time = new Date();
