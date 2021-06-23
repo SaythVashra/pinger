@@ -1,6 +1,4 @@
 const https = require("https");
-const play = require('audio-play');
-const load = require('audio-loader');
 
 let weAreOnline = false;
 let html = "";
@@ -24,15 +22,15 @@ function getDate() {
 }
 
 function connectAlarm() {
-    let player = require('play-sound')(opts = {})
-    player.play('sounds/connect-alarm.mp3', function (err) {
+    const player = require('play-sound')(opts = {players: "mpg123"});
+    player.play(__dirname + '/sounds/connect-alarm.mp3', function (err) {
         if (err) throw err
     })
 }
 
 function disconnectAlarm() {
-    let player = require('play-sound')(opts = {})
-    player.play('sounds/disconnect-alarm.mp3', function (err) {
+    const player = require('play-sound')(opts = {players: "mpg123"});
+    player.play(__dirname + '/sounds/disconnect-alarm.mp3', function (err) {
         if (err) throw err
     })
 }
@@ -62,4 +60,5 @@ function checkInternetConnection() {
     });
 }
 
+checkInternetConnection();
 setInterval(checkInternetConnection, 10000);
