@@ -11,6 +11,7 @@ const rl = readline.createInterface({
 //*******************************************************************//
 
 let weAreOnline = false;
+let isMuted = false;
 let autoRunSteam = false;
 let html = "";
 let appleCaptiveHtml = "<HTML><HEAD><TITLE>Success</TITLE></HEAD><BODY>Success</BODY></HTML>\n"
@@ -33,17 +34,21 @@ function getDate() {
 }
 
 function connectAlarm() {
-    const player = require('play-sound')(opts = {players: "mpg123"});
-    player.play(__dirname + '/sounds/connect-alarm.mp3', function (err) {
-        if (err) throw err
-    })
+    if(!isMuted){
+        const player = require('play-sound')(opts = {players: "mpg123"});
+        player.play(__dirname + '/sounds/connect-alarm.mp3', function (err) {
+            if (err) throw err
+        })
+    }
 }
 
 function disconnectAlarm() {
+    if(!isMuted){
     const player = require('play-sound')(opts = {players: "mpg123"});
     player.play(__dirname + '/sounds/disconnect-alarm.mp3', function (err) {
         if (err) throw err
     })
+    }
 }
 
 function checkInternetConnection() {
@@ -132,9 +137,18 @@ rl.on('line', (input) => {
             console.log("Autorun Steam set to OFF.");
             break;
 
+        case "snd off":
+            isMuted = true;
+            console.log("Sound muted.");
+            break;
+
+        case "snd on":
+            isMuted = false;
+            console.log("Sound activated.");
+            break;
+
         default:
             console.log("'" + input + "'" + " is not a valid command.");
 
     }
 });
-
